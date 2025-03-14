@@ -154,6 +154,21 @@
         }
     </script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loginSection = document.getElementById("login-section");
+            const registroSection = document.getElementById("registro-section");
+            const mostrarRegistroBtn = document.getElementById("mostrar-registro");
+    
+            // Evento para cambiar de inicio de sesión a registro
+            mostrarRegistroBtn.addEventListener("click", function (event) {
+                event.preventDefault();
+                loginSection.style.display = "none";  // Ocultar login
+                registroSection.style.display = "block";  // Mostrar registro
+            });
+        });
+    </script>
+
     <script src="perfil.js"></script>
 </body>
 </html>
