@@ -1,23 +1,58 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("perfil-form");
+    const loginSection = document.getElementById("login-section");
+    const registroSection = document.getElementById("registro-section");
+    const accesoPrediccion = document.getElementById("acceso-prediccion");
 
-    // Cargar datos guardados en localStorage
-    document.getElementById("alias").value = localStorage.getItem("alias") || "";
-    document.getElementById("email").value = localStorage.getItem("email") || "";
-    document.getElementById("escuderia").value = localStorage.getItem("escuderia") || "Ferrari";
-    document.getElementById("piloto").value = localStorage.getItem("piloto") || "";
-    document.getElementById("pais").value = localStorage.getItem("pais") || "";
+    const mostrarRegistro = document.getElementById("mostrar-registro");
+    const loginForm = document.getElementById("login-form");
+    const registroForm = document.getElementById("registro-form");
 
-    form.addEventListener("submit", function (event) {
+    // Mostrar formulario de registro
+    mostrarRegistro.addEventListener("click", function (event) {
+        event.preventDefault();
+        loginSection.style.display = "none";
+        registroSection.style.display = "block";
+    });
+
+    // Registro de usuario
+    registroForm.addEventListener("submit", function (event) {
         event.preventDefault();
 
-        // Guardar datos en localStorage
-        localStorage.setItem("alias", document.getElementById("alias").value);
-        localStorage.setItem("email", document.getElementById("email").value);
-        localStorage.setItem("escuderia", document.getElementById("escuderia").value);
-        localStorage.setItem("piloto", document.getElementById("piloto").value);
-        localStorage.setItem("pais", document.getElementById("pais").value);
+        const alias = document.getElementById("alias").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
 
-        alert("Perfil guardado correctamente.");
+        if (password !== confirmPassword) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+
+        // Guardar datos en localStorage
+        localStorage.setItem("alias", alias);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+
+        alert("Cuenta creada con éxito. Ahora puedes iniciar sesión.");
+        location.reload();
+    });
+
+    // Inicio de sesión
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
+
+        const storedEmail = localStorage.getItem("email");
+        const storedPassword = localStorage.getItem("password");
+
+        if (email === storedEmail && password === storedPassword) {
+            alert("Inicio de sesión exitoso.");
+            loginSection.style.display = "none";
+            accesoPrediccion.style.display = "block";
+        } else {
+            alert("Correo o contraseña incorrectos.");
+        }
     });
 });
