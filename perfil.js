@@ -1,58 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const loginSection = document.getElementById("login-section");
-    const registroSection = document.getElementById("registro-section");
+    const loginForm = document.getElementById("login-form");
+    const perfilForm = document.getElementById("perfil-form");
     const accesoPrediccion = document.getElementById("acceso-prediccion");
 
-    const mostrarRegistro = document.getElementById("mostrar-registro");
-    const loginForm = document.getElementById("login-form");
-    const registroForm = document.getElementById("registro-form");
+    // Función para manejar el inicio de sesión
+    if (loginForm) {
+        loginForm.addEventListener("submit", function (event) {
+            event.preventDefault();  // Evitar que el formulario recargue la página
+            
+            // Obtener valores del formulario
+            const email = document.getElementById("login-email").value;
+            const password = document.getElementById("login-password").value;
 
-    // Mostrar formulario de registro
-    mostrarRegistro.addEventListener("click", function (event) {
-        event.preventDefault();
-        loginSection.style.display = "none";
-        registroSection.style.display = "block";
-    });
+            // Verificar si hay una cuenta guardada en localStorage
+            const userData = JSON.parse(localStorage.getItem(email));
 
-    // Registro de usuario
-    registroForm.addEventListener("submit", function (event) {
-        event.preventDefault();
+            if (userData && userData.password === password) {
+                localStorage.setItem("loggedUser", email); // Guardar sesión del usuario
+                window.location.href = "perfil.html"; // Redirigir al perfil
+            } else {
+                alert("⚠️ Correo o contraseña incorrectos. Intenta de nuevo.");
+            }
+        });
+    }
 
-        const alias = document.getElementById("alias").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirm-password").value;
+    // Cargar perfil al entrar en perfil.html
+    if (window.location.pathname.includes("perfil.html")) {
+        const loggedUser = localStorage.getItem("loggedUser");
 
-        if (password !== confirmPassword) {
-            alert("Las contraseñas no coinciden.");
-            return;
-        }
+        if (loggedUser) {
+            const userData = JSON.parse(localStorage.getItem(loggedUser));
+            document.getElementById("alias").value = userData.alias;
+            document.getElementById("email").value = userData.email;
+            document.getElementById("escuderia").value = userData.escuderia;
+            document.getElementById("piloto").value = userData.piloto;
+            document.getElementById("pais").value = userData.pais;
 
-        // Guardar datos en localStorage
-        localStorage.setItem("alias", alias);
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-
-        alert("Cuenta creada con éxito. Ahora puedes iniciar sesión.");
-        location.reload();
-    });
-
-    // Inicio de sesión
-    loginForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const email = document.getElementById("login-email").value;
-        const password = document.getElementById("login-password").value;
-
-        const storedEmail = localStorage.getItem("email");
-        const storedPassword = localStorage.getItem("password");
-
-        if (email === storedEmail && password === storedPassword) {
-            alert("Inicio de sesión exitoso.");
-            loginSection.style.display = "none";
+            // Mostrar botón de acceso al formulario de predicciones
             accesoPrediccion.style.display = "block";
-        } else {
-            alert("Correo o contraseña incorrectos.");
         }
-    });
+    }
+
+    // Manejar registro de usuario
+    if (perfilForm) {
+        perfilForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            // Obtener valores del formulario
+            const alias = document.getElementById("alias").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;  // Nuevo campo
+            const escuderia = document.getElementById("escuderia").value;
+            const piloto = document.getElementById("piloto").value;
+            const pais = document.getElementById("pais").value;
+
+            // Guardar datos en localStorage
+            localStorage.setItem(email, JSON.stringify({
+                alias, email, password, escuderia, piloto, pais
+            }));
+
+            alert("✅ Cuenta creada con éxito. Ahora puedes iniciar sesión.");
+            window.location.href = "perfil.html";  // Redirigir a perfil
+        });
+    }
 });
