@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liga F1 - Inicio</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🏎️ Bienvenido a la Liga F1</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li><a href="predicciones.html">Predicciones</a></li>
+                <li class="dropdown">
+                    <a href="#">Carreras ▼</a>
+                    <div class="dropdown-content" id="menu-carreras"></div>
+                </li>
+                <li><a href="resultados.html">Resultados</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="reglas.html">Reglas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>¿Cómo participar?</h2>
+        <p>Regístrate y participa prediciendo los resultados de cada GP de la temporada 2025.</p>
+        <a href="perfil.html" class="btn">👤 Crear Mi Perfil</a>
+        <a href="https://forms.gle/5gqZDX1jcQXeNyVr9" target="_blank" class="btn">📋 Completar Predicción</a>
+    </section>
+
+    <section>
+        <h2>Clasificación General</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Posición</th>
+                    <th>Alias</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-clasificacion"></tbody>
+        </table>
+    </section>
+
+    <script src="js/menu.js"></script>
+    <script src="js/predictions.js"></script>
+</body>
+</html>
