@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Liga F1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>👤 Mi Perfil</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="predicciones.html">Predicciones</a></li>
+                <li class="dropdown">
+                    <a href="#">Carreras ▼</a>
+                    <div class="dropdown-content" id="menu-carreras"></div>
+                </li>
+                <li><a href="resultados.html">Resultados</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="reglas.html">Reglas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Configura tu Perfil</h2>
+        <form id="perfil-form">
+            <label for="alias">Alias:</label>
+            <input type="text" id="alias" required>
+
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" required>
+
+            <label for="escuderia">Escudería Favorita:</label>
+            <select id="escuderia">
+                <option value="Ferrari">Scuderia Ferrari HP</option>
+                <option value="Mercedes">Mercedes-AMG PETRONAS Formula One Team</option>
+                <option value="Red Bull">Oracle Red Bull Racing</option>
+                <option value="McLaren">McLaren Formula 1 Team</option>
+                <option value="Aston Martin">Aston Martin Aramco Formula One Team</option>
+                <option value="Alpine">BWT Alpine Formula 1 Team</option>
+                <option value="Haas">MoneyGram Haas F1 Team</option>
+                <option value="Racing Bulls">Visa Cash App Racing Bulls Formula One Team</option>
+                <option value="Williams">Atlassian Williams Racing</option>
+                <option value="Sauber">Stake F1 Team Kick Sauber</option>
+            </select>
+
+            <label for="piloto">Piloto Favorito:</label>
+            <select id="piloto">
+                <option value="Lando Norris">Lando Norris</option>
+                <option value="Oscar Piastri">Oscar Piastri</option>
+                <option value="Lewis Hamilton">Lewis Hamilton</option>
+                <option value="Charles Leclerc">Charles Leclerc</option>
+                <option value="Max Verstappen">Max Verstappen</option>
+                <option value="Liam Lawson">Liam Lawson</option>
+                <option value="George Russell">George Russell</option>
+                <option value="Andrea Kimi Antonelli">Andrea Kimi Antonelli</option>
+                <option value="Fernando Alonso">Fernando Alonso</option>
+                <option value="Lance Stroll">Lance Stroll</option>
+                <option value="Pierre Gasly">Pierre Gasly</option>
+                <option value="Jack Doohan">Jack Doohan</option>
+                <option value="Esteban Ocon">Esteban Ocon</option>
+                <option value="Oliver Bearman">Oliver Bearman</option>
+                <option value="Yuki Tsunoda">Yuki Tsunoda</option>
+                <option value="Isack Hadjar">Isack Hadjar</option>
+                <option value="Carlos Sainz Jr.">Carlos Sainz Jr.</option>
+                <option value="Alexander Albon">Alexander Albon</option>
+                <option value="Nico Hülkenberg">Nico Hülkenberg</option>
+                <option value="Gabriel Bortoleto">Gabriel Bortoleto</option>
+            </select>
+
+            <label for="pais">País:</label>
+            <input type="text" id="pais" placeholder="Buscar país..." onkeyup="filtrarPaises()">
+            <ul id="pais-lista">
+                <!-- Lista de países se generará aquí -->
+            </ul>
+
+            <button type="submit">Guardar Perfil</button>
+        </form>
+    </section>
+
+    <script>
+        const paises = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
+            "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", 
+            "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
+            "Brunei", "Bulgaria", "Burkina Faso", "Burundi", "Cabo Verde", "Cambodia", "Cameroon", "Canada", 
+            "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", 
+            "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", 
+            "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", 
+            "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", 
+            "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", 
+            "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", 
+            "Kenya", "Kiribati", "Korea, North", "Korea, South", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", 
+            "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", 
+            "Malaysia", "Maldives", "Mali", "Malta", "Marshall Islands", "Mauritania", "Mauritius", "Mexico", 
+            "Micronesia", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Myanmar", 
+            "Namibia", "Nauru", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", 
+            "Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", "Paraguay", "Peru", "Philippines", 
+            "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+            "Saint Vincent and the Grenadines", "Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", 
+            "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", 
+            "Somalia", "South Africa", "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", 
+            "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste", "Togo", "Tonga", "Trinidad and Tobago", 
+            "Tunisia", "Turkey", "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", 
+            "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", 
+            "Zimbabwe"
+        ];
+
+        const paisInput = document.getElementById("pais");
+        const paisLista = document.getElementById("pais-lista");
+
+        function filtrarPaises() {
+            const textoBusqueda = paisInput.value.toLowerCase();
+            paisLista.innerHTML = "";
+
+            const paisesFiltrados = paises.filter(pais => pais.toLowerCase().includes(textoBusqueda));
+            paisesFiltrados.forEach(pais => {
+                const li = document.createElement("li");
+                li.textContent = pais;
+                li.onclick = () => {
+                    paisInput.value = pais;
+                    paisLista.innerHTML = "";  // Limpiar la lista al seleccionar un país
+                };
+                paisLista.appendChild(li);
+            });
+        }
+    </script>
+
+    <script src="js/perfil.js"></script>
+</body>
+</html>
