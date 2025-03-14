@@ -1,27 +1,27 @@
-import { API_URL } from "../config.js";
+document.addEventListener("DOMContentLoaded", function () {
+    const API_URL = "https://script.google.com/macros/s/AKfycbw6xDkqFcYxGWvM3SyLSJLdO_6bR7D-zCEwu5ipEHZSRTWM3WIATYA9NxMuPtbxn70a/exec"; // Reemplaza con tu Google Apps Script URL
 
-async function cargarPredicciones() {
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); // Ordenar por fecha descendente
+            cargarPredicciones(data);
+        })
+        .catch(error => console.error("Error al cargar datos:", error));
+});
 
-        data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha)); // Orden cronológico descendente
+function cargarPredicciones(datos) {
+    let tbody = document.getElementById("tabla-predicciones");
+    tbody.innerHTML = "";
 
-        let tabla = document.getElementById("tabla-predicciones");
-        if (!tabla) return;
-
-        tabla.innerHTML = "";
-        data.forEach(prediccion => {
-            let fila = `<tr>
-                <td>${prediccion.alias}</td>
-                <td>${prediccion.prediccion}</td>
-                <td>${new Date(prediccion.fecha).toLocaleDateString()}</td>
-            </tr>`;
-            tabla.innerHTML += fila;
-        });
-    } catch (error) {
-        console.error("Error al cargar predicciones:", error);
-    }
+    datos.forEach(item => {
+        let fila = `<tr>
+            <td>${item.alias}</td>
+            <td>${item.prediccion}</td>
+            <td>${item.fecha}</td>
+        </tr>`;
+        tbody.innerHTML += fila;
+    });
 }
 
 function filtrarPredicciones() {
@@ -33,5 +33,3 @@ function filtrarPredicciones() {
         fila.style.display = alias.includes(input) ? "" : "none";
     });
 }
-
-document.addEventListener("DOMContentLoaded", cargarPredicciones);
