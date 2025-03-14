@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados - Liga F1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🏆 Resultados</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li class="dropdown">
+                    <a href="#">Carreras ▼</a>
+                    <div class="dropdown-content" id="menu-carreras"></div>
+                </li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="reglas.html">Reglas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Tabla de Resultados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Alias</th>
+                    <th>Puntos</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-resultados"></tbody>
+        </table>
+    </section>
+
+    <script src="js/menu.js"></script>
+    <script src="js/resultados.js"></script>
+</body>
+</html>

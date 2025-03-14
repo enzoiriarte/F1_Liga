@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predicciones - Liga F1</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>📋 Predicciones</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="perfil.html">Mi Perfil</a></li>
+                <li class="dropdown">
+                    <a href="#">Carreras ▼</a>
+                    <div class="dropdown-content" id="menu-carreras"></div>
+                </li>
+                <li><a href="resultados.html">Resultados</a></li>
+                <li><a href="estadisticas.html">Estadísticas</a></li>
+                <li><a href="reglas.html">Reglas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Predicciones Enviadas</h2>
+        <input type="text" id="buscarAlias" placeholder="Buscar alias..." onkeyup="filtrarPredicciones()">
+        <table>
+            <thead>
+                <tr>
+                    <th>Alias</th>
+                    <th>Predicción</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-predicciones"></tbody>
+        </table>
+    </section>
+
+    <script src="js/menu.js"></script>
+    <script src="js/predictions.js"></script>
+</body>
+</html>
