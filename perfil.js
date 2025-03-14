@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginForm = document.getElementById("login-form");
     const perfilForm = document.getElementById("perfil-form");
     const accesoPrediccion = document.getElementById("acceso-prediccion");
+    const loggedUser = localStorage.getItem("loggedUser");
+
+    if (loggedUser) {
+        accesoPrediccion.style.display = "block";  // Muestra el acceso si el usuario está logueado
+    }
+});
 
     // Función para manejar el inicio de sesión
     if (loginForm) {
