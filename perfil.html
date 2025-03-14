@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Perfil - Liga F1</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -24,14 +24,34 @@
         </nav>
     </header>
 
-    <section>
-        <h2>Configura tu Perfil</h2>
-        <form id="perfil-form">
+    <section id="login-section">
+        <h2>Iniciar Sesión</h2>
+        <form id="login-form">
+            <label for="login-email">Correo Electrónico:</label>
+            <input type="email" id="login-email" required>
+
+            <label for="login-password">Contraseña:</label>
+            <input type="password" id="login-password" required>
+
+            <button type="submit">Acceder</button>
+        </form>
+        <p>¿No tienes una cuenta? <a href="#" id="mostrar-registro">Regístrate</a></p>
+    </section>
+
+    <section id="registro-section" style="display: none;">
+        <h2>Regístrate</h2>
+        <form id="registro-form">
             <label for="alias">Alias:</label>
             <input type="text" id="alias" required>
 
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" required>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" required>
+
+            <label for="confirm-password">Confirmar Contraseña:</label>
+            <input type="password" id="confirm-password" required>
 
             <label for="escuderia">Escudería Favorita:</label>
             <select id="escuderia">
@@ -73,16 +93,21 @@
 
             <label for="pais">País:</label>
             <input type="text" id="pais" placeholder="Buscar país..." onkeyup="filtrarPaises()">
-            <ul id="pais-lista">
-                <!-- Lista de países se generará aquí -->
-            </ul>
+            <ul id="pais-lista"></ul>
 
-            <button type="submit">Guardar Perfil</button>
+            <button type="submit">Crear Cuenta</button>
         </form>
     </section>
 
+    <section id="acceso-prediccion" style="display: none;">
+        <h2>Acceso a Predicciones</h2>
+        <p>Puedes completar tu predicción en el siguiente enlace:</p>
+        <a href="https://forms.gle/5gqZDX1jcQXeNyVr9" target="_blank" class="btn">📋 Completar Predicción</a>
+    </section>
+
     <script>
-        const paises = [
+        // Lista de países con búsqueda interactiva
+         const paises = [
             "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Antigua and Barbuda", "Argentina", "Armenia", 
             "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", 
             "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
@@ -122,7 +147,7 @@
                 li.textContent = pais;
                 li.onclick = () => {
                     paisInput.value = pais;
-                    paisLista.innerHTML = "";  // Limpiar la lista al seleccionar un país
+                    paisLista.innerHTML = "";
                 };
                 paisLista.appendChild(li);
             });
