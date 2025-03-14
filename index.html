@@ -8,26 +8,30 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
     <header>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/2560px-F1.svg.png" alt="F1 Logo">
         <h1>🏎️ Liga F1 - Clasificación</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropbtn">Carreras</a>
-                    <div class="dropdown-content" id="menu-carreras">
-                        <!-- Lista de carreras generada dinámicamente -->
-                    </div>
-                </li>
-                <li><a href="carreras.html">Predicciones</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <section>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="dropdown">
+                <a href="#">Carreras</a>
+                <div class="dropdown-content" id="menu-carreras"></div>
+            </li>
+            <li><a href="carreras.html">Predicciones</a></li>
+        </ul>
+    </nav>
+
+    <section class="section-clasificacion">
         <h2>Clasificación General</h2>
         <input type="text" id="buscarAlias" placeholder="Buscar alias..." onkeyup="filtrarTabla()">
+        <button onclick="filtrarTabla()">🔎 Buscar</button>
+
         <canvas id="chart"></canvas>
+
         <table>
             <thead>
                 <tr>
@@ -36,9 +40,7 @@
                     <th>Puntos</th>
                 </tr>
             </thead>
-            <tbody id="tabla-body">
-                <!-- Datos aquí -->
-            </tbody>
+            <tbody id="tabla-body"></tbody>
         </table>
     </section>
 

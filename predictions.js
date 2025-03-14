@@ -7,10 +7,8 @@ async function cargarDatos() {
         const response = await fetch(API_URL);
         const data = await response.json();
 
-        // Ordenar por puntuación
         data.sort((a, b) => b.puntos - a.puntos);
 
-        // Mostrar datos
         cargarTabla(data);
         generarGrafico(data);
     } catch (error) {

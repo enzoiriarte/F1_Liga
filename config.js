@@ -1,8 +1,8 @@
 // Archivo: config.js
 
-export const API_URL = "https://script.google.com/macros/s/AKfycbw6xDkqFcYxGWvM3SyLSJLdO_6bR7D-zCEwu5ipEHZSRTWM3WIATYA9NxMuPtbxn70a/exec";
+export const API_URL = "https://script.google.com/macros/s/AKfycbzWJlCjYR-9KVQLB2Q06Y7YWqol5JoQeeY8f6wQNSkwEYBm7ZKmIdlEsC-8WsjmTbg/exec";
 
-// Lista de carreras con sus nombres y URLs
+// Lista de carreras con nombres y enlaces dinámicos
 export const gps = [
     { nombre: "GP de Bahréin", url: "carrera.html?gp=bahrain" },
     { nombre: "GP de Arabia Saudita", url: "carrera.html?gp=arabia" },
