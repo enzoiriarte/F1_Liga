@@ -1,24 +1,23 @@
-import { API_URL } from "../config.js";
+document.addEventListener("DOMContentLoaded", function () {
+    const API_URL = "https://script.google.com/macros/s/AKfycbw6xDkqFcYxGWvM3SyLSJLdO_6bR7D-zCEwu5ipEHZSRTWM3WIATYA9NxMuPtbxn70a/exec"; // Reemplaza con tu Google Apps Script URL
 
-async function cargarResultados() {
-    try {
-        const response = await fetch(API_URL);
-        const data = await response.json();
+    fetch(API_URL)
+        .then(response => response.json())
+        .then(data => {
+            cargarResultados(data);
+        })
+        .catch(error => console.error("Error al cargar datos:", error));
+});
 
-        let tabla = document.getElementById("tabla-resultados");
-        if (!tabla) return;
+function cargarResultados(datos) {
+    let tbody = document.getElementById("tabla-resultados");
+    tbody.innerHTML = "";
 
-        tabla.innerHTML = "";
-        data.forEach(resultado => {
-            let fila = `<tr>
-                <td>${resultado.alias}</td>
-                <td>${resultado.puntos}</td>
-            </tr>`;
-            tabla.innerHTML += fila;
-        });
-    } catch (error) {
-        console.error("Error al cargar resultados:", error);
-    }
+    datos.forEach(item => {
+        let fila = `<tr>
+            <td>${item.alias}</td>
+            <td>${item.puntos}</td>
+        </tr>`;
+        tbody.innerHTML += fila;
+    });
 }
-
-document.addEventListener("DOMContentLoaded", cargarResultados);
